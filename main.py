@@ -1,4 +1,5 @@
 import sys
+import re
 from PySide2.QtUiTools import QUiLoader #allows us to import .ui files
 from PySide2.QtWidgets import QApplication, QLineEdit, QPushButton
 from PySide2.QtCore import QFile, QObject
@@ -148,9 +149,12 @@ class MainWindow(QObject):
     def equals_button_clicked(self):
         equalsButton = self.window.findChild(QPushButton, 'equalsButton')
         accumulator = self.window.findChild(QLineEdit, 'accumulatorText')
+
+        accumulator.setText(str(eval(accumulator.text() )))
+        return 
+        """ # Below is version 1, above is version 2, uses eval() fn
         total = 0
         a, op, b = accumulator.text()
-
         if (op == '+'):
             total = int(a) + int(b)
         elif (op == '-'):
@@ -161,6 +165,7 @@ class MainWindow(QObject):
             total = int(a) / int(b)
 
         accumulator.setText(str(total) )
+        """
     
 
 
